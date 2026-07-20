@@ -3,110 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tracteurs CLAAS | Performance & Innovation</title>
+  <title>Tracteurs CLAAS | Version fidèle</title>
   <style>
     :root{
-      --claas-green:#1f7a3a;
-      --claas-dark:#103d1f;
+      --primary:#0f3b1f;
+      --secondary:#1f7a3a;
       --accent:#c7ff3d;
-      --bg:#f5f7f6;
-      --text:#1d1d1d;
+      --light:#f4f7f4;
+      --text:#1b1b1b;
       --white:#ffffff;
+      --shadow:0 10px 25px rgba(0,0,0,.12);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
+      font-family: "Segoe UI", Arial, sans-serif;
       color:var(--text);
+      background:var(--light);
       line-height:1.6;
     }
+
+    /* Header / nav (style proche du site de base) */
     header{
-      background:linear-gradient(135deg,var(--claas-dark),var(--claas-green));
-      color:var(--white);
-      padding:18px 8%;
-      position:sticky;top:0;z-index:20;
-      box-shadow:0 6px 18px rgba(0,0,0,.18);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:1000;
+      background:linear-gradient(90deg, rgba(15,59,31,.96), rgba(31,122,58,.93));
+      backdrop-filter: blur(4px);
+      box-shadow:0 4px 14px rgba(0,0,0,.16);
     }
     .nav{
-      display:flex;justify-content:space-between;align-items:center;gap:20px;
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 20px;
     }
-    .logo{font-weight:800;font-size:1.35rem;letter-spacing:.5px}
-    .menu{display:flex;gap:18px;flex-wrap:wrap}
-    .menu a{
-      color:var(--white);text-decoration:none;font-weight:700;opacity:.92
-    }
-    .menu a:hover{opacity:1;text-decoration:underline}
-
-    .hero{
-      min-height:72vh;
-      display:grid;
-      place-items:center;
-      padding:70px 8% 50px;
-      background:
-        linear-gradient(rgba(16,61,31,.72), rgba(16,61,31,.62)),
-        url("https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?auto=format&fit=crop&w=1600&q=80") center/cover;
+    .brand{
       color:var(--white);
-      text-align:center;
+      font-weight:900;
+      letter-spacing:.8px;
+      font-size:1.1rem;
     }
-    .hero h1{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:14px}
-    .hero p{max-width:820px;margin:0 auto 22px;font-size:1.08rem}
-    .btn{
+    .brand span{color:var(--accent)}
+    .menu{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .menu a{
+      color:var(--white);
+      text-decoration:none;
+      font-weight:600;
+      font-size:.95rem;
+      opacity:.95;
+      transition:.2s;
+    }
+    .menu a:hover{opacity:1;color:var(--accent)}
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      background:
+        linear-gradient(rgba(8,27,14,.62), rgba(8,27,14,.6)),
+        url("https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1700&q=80") center/cover no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:var(--white);
+      padding:110px 20px 60px;
+    }
+    .hero-content{
+      max-width:900px;
+      animation:fadeUp 1s ease both;
+    }
+    .hero h1{
+      font-size:clamp(2rem,5vw,3.6rem);
+      line-height:1.15;
+      margin-bottom:16px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+    }
+    .hero p{
+      font-size:clamp(1rem,2vw,1.2rem);
+      margin-bottom:28px;
+      opacity:.96;
+    }
+    .cta{
       display:inline-block;
       background:var(--accent);
-      color:#0b2b14;
+      color:#132b18;
       font-weight:800;
       text-decoration:none;
-      padding:12px 22px;
       border-radius:999px;
-      transition:.2s transform ease;
+      padding:13px 28px;
+      transition:transform .2s ease, box-shadow .2s ease;
+      box-shadow:0 8px 20px rgba(0,0,0,.2);
     }
-    .btn:hover{transform:translateY(-2px)}
+    .cta:hover{
+      transform:translateY(-3px);
+      box-shadow:0 12px 22px rgba(0,0,0,.25);
+    }
 
-    section{padding:64px 8%}
+    /* Sections */
+    section{
+      padding:78px 20px;
+    }
+    .container{
+      max-width:1200px;
+      margin:auto;
+    }
     .section-title{
-      font-size:clamp(1.4rem,3vw,2rem);
-      margin-bottom:22px;
-      color:var(--claas-dark);
+      text-align:center;
+      color:var(--primary);
+      margin-bottom:34px;
+      font-size:clamp(1.5rem,3vw,2.2rem);
+      position:relative;
+    }
+    .section-title::after{
+      content:"";
+      display:block;
+      width:90px;height:4px;
+      border-radius:50px;
+      margin:10px auto 0;
+      background:linear-gradient(90deg,var(--secondary),var(--accent));
     }
 
+    /* Cards (modèles) */
     .cards{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:18px;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:22px;
     }
     .card{
       background:var(--white);
       border-radius:14px;
       overflow:hidden;
-      box-shadow:0 8px 18px rgba(0,0,0,.08);
+      box-shadow:var(--shadow);
+      transform:translateY(20px);
+      opacity:0;
+      animation:fadeUp .8s ease forwards;
     }
-    .card img{width:100%;height:180px;object-fit:cover}
-    .card-content{padding:16px}
-    .card h3{color:var(--claas-dark);margin-bottom:8px}
-    .tag{
-      display:inline-block;
+    .card:nth-child(2){animation-delay:.15s}
+    .card:nth-child(3){animation-delay:.3s}
+    .card:nth-child(4){animation-delay:.45s}
+    .card img{
+      width:100%;
+      height:190px;
+      object-fit:cover;
+    }
+    .card-content{
+      padding:16px;
+    }
+    .card h3{
+      color:var(--primary);
+      margin-bottom:8px;
+      font-size:1.15rem;
+    }
+    .badge{
       margin-top:10px;
-      background:#eaf6ed;
-      color:var(--claas-green);
+      display:inline-block;
+      background:#e9f6ec;
+      color:var(--secondary);
+      padding:5px 11px;
       border-radius:999px;
-      padding:5px 10px;
-      font-size:.85rem;
+      font-size:.84rem;
       font-weight:700;
     }
 
-    .about{
+    /* Bloc texte / arguments */
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:18px;
+      margin-top:10px;
+    }
+    .feature{
       background:var(--white);
+      border-left:5px solid var(--secondary);
+      border-radius:10px;
+      padding:18px;
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+      transition:transform .2s ease;
+    }
+    .feature:hover{transform:translateY(-3px)}
+    .feature h4{
+      color:var(--primary);
+      margin-bottom:7px;
+    }
+
+    /* CTA contact bloc */
+    .contact-box{
+      background:linear-gradient(120deg,var(--primary),var(--secondary));
+      color:var(--white);
       border-radius:16px;
-      padding:26px;
-      box-shadow:0 8px 18px rgba(0,0,0,.06);
+      padding:28px;
+      box-shadow:var(--shadow);
+      text-align:center;
+    }
+    .contact-box p{margin:8px 0 18px}
+    .contact-box a{
+      color:#132b18;
+      background:var(--accent);
+      text-decoration:none;
+      font-weight:800;
+      padding:11px 20px;
+      border-radius:999px;
+      display:inline-block;
     }
 
     footer{
-      background:var(--claas-dark);
-      color:#dce8df;
+      background:#0d2e18;
+      color:#d6e6db;
       text-align:center;
-      padding:22px 8%;
-      margin-top:30px;
+      padding:20px;
+      font-size:.95rem;
+    }
+
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @media (max-width:760px){
+      .menu{gap:12px}
+      .menu a{font-size:.9rem}
+      .nav{padding:12px 14px}
     }
   </style>
 </head>
@@ -114,84 +239,112 @@
 
   <header>
     <nav class="nav">
-      <div class="logo">CLAAS TRACTEURS</div>
+      <div class="brand">CLAAS <span>TRACTEURS</span></div>
       <div class="menu">
+        <a href="#accueil">Accueil</a>
         <a href="#modeles">Modèles</a>
-        <a href="#atouts">Atouts</a>
+        <a href="#avantages">Avantages</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <div>
-        <h1>La puissance CLAAS au service de vos champs</h1>
+    <!-- Section 1 : Hero -->
+    <section class="hero" id="accueil">
+      <div class="hero-content">
+        <h1>Performance CLAAS<br>pour chaque exploitation</h1>
         <p>
-          Découvrez des tracteurs robustes, connectés et performants pour tous vos travaux agricoles :
-          semis, transport, travail du sol et exploitation intensive.
+          Une gamme de tracteurs conçue pour la puissance, la précision et le confort :
+          des travaux quotidiens aux campagnes les plus intensives.
         </p>
-        <a class="btn" href="#modeles">Voir les gammes</a>
+        <a href="#modeles" class="cta">Découvrir les modèles</a>
       </div>
     </section>
 
+    <!-- Section 2 : Modèles -->
     <section id="modeles">
-      <h2 class="section-title">Nos modèles phares</h2>
-      <div class="cards">
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=900&q=80" alt="Tracteur CLAAS ARION">
-          <div class="card-content">
-            <h3>CLAAS ARION</h3>
-            <p>Polyvalent et confortable, idéal pour les exploitations mixtes.</p>
-            <span class="tag">125–205 ch</span>
-          </div>
-        </article>
+      <div class="container">
+        <h2 class="section-title">Gammes de tracteurs CLAAS</h2>
+        <div class="cards">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=900&q=80" alt="CLAAS AXION">
+            <div class="card-content">
+              <h3>AXION</h3>
+              <p>Puissance élevée et transmission optimisée pour les travaux lourds et les grandes surfaces.</p>
+              <span class="badge">205–445 ch</span>
+            </div>
+          </article>
 
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=900&q=80" alt="Tracteur CLAAS AXION">
-          <div class="card-content">
-            <h3>CLAAS AXION</h3>
-            <p>Haute puissance, parfaite pour le travail intensif et les grandes parcelles.</p>
-            <span class="tag">205–445 ch</span>
-          </div>
-        </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?auto=format&fit=crop&w=900&q=80" alt="CLAAS ARION">
+            <div class="card-content">
+              <h3>ARION</h3>
+              <p>Le bon compromis entre polyvalence, confort de conduite et rendement pour l’exploitation mixte.</p>
+              <span class="badge">125–205 ch</span>
+            </div>
+          </article>
 
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80" alt="Tracteur CLAAS ELIOS">
-          <div class="card-content">
-            <h3>CLAAS ELIOS</h3>
-            <p>Compact, maniable et économique pour les travaux quotidiens.</p>
-            <span class="tag">75–103 ch</span>
-          </div>
-        </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=900&q=80" alt="CLAAS ELIOS">
+            <div class="card-content">
+              <h3>ELIOS</h3>
+              <p>Compact et maniable, idéal pour les travaux d’élevage, d’entretien et les parcelles étroites.</p>
+              <span class="badge">75–103 ch</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="CLAAS XERION">
+            <div class="card-content">
+              <h3>XERION</h3>
+              <p>Très haute puissance, traction maximale et technologies avancées pour les chantiers exigeants.</p>
+              <span class="badge">435–653 ch</span>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section id="atouts">
-      <h2 class="section-title">Pourquoi choisir CLAAS ?</h2>
-      <div class="about">
-        <p>
-          Les tracteurs CLAAS combinent technologie embarquée, consommation optimisée,
-          confort cabine premium et maintenance simplifiée.
-          Avec des systèmes de guidage précis et une excellente motricité, vous gagnez
-          en rendement et en efficacité, saison après saison.
-        </p>
+    <!-- Section 3 : Avantages -->
+    <section id="avantages">
+      <div class="container">
+        <h2 class="section-title">Pourquoi choisir un tracteur CLAAS ?</h2>
+        <div class="feature-grid">
+          <div class="feature">
+            <h4>Cabine confort premium</h4>
+            <p>Ergonomie, visibilité et réduction des vibrations pour travailler plus longtemps sans fatigue.</p>
+          </div>
+          <div class="feature">
+            <h4>Technologie embarquée</h4>
+            <p>Guidage GPS, télémétrie et pilotage intelligent pour une précision optimale au champ.</p>
+          </div>
+          <div class="feature">
+            <h4>Rendement & sobriété</h4>
+            <p>Moteurs performants et gestion efficace de la puissance pour réduire les coûts d’exploitation.</p>
+          </div>
+          <div class="feature">
+            <h4>Fiabilité terrain</h4>
+            <p>Conçus pour durer, avec une maintenance facilitée et un service après-vente réactif.</p>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- Section 4 : Contact -->
     <section id="contact">
-      <h2 class="section-title">Contact & démonstration</h2>
-      <div class="about">
-        <p>
-          Besoin d’un devis ou d’un essai en conditions réelles ?  
-          Écris-nous à <strong>contact@exemple-claas.fr</strong> et nous te recontactons rapidement.
-        </p>
+      <div class="container">
+        <div class="contact-box">
+          <h2>Demande d’essai ou de devis</h2>
+          <p>Parle-nous de ton exploitation, et reçois une recommandation CLAAS adaptée à tes besoins.</p>
+          <a href="mailto:contact@exemple-claas.fr">contact@exemple-claas.fr</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    © 2026 - Site vitrine Tracteurs CLAAS
+    © 2026 - Tracteurs CLAAS | Version fidèle inspirée de la mise en page d’origine
   </footer>
 
 </body>
