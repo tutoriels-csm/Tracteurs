@@ -1,351 +1,182 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tracteurs CLAAS | Version fidèle</title>
-  <style>
-    :root{
-      --primary:#0f3b1f;
-      --secondary:#1f7a3a;
-      --accent:#c7ff3d;
-      --light:#f4f7f4;
-      --text:#1b1b1b;
-      --white:#ffffff;
-      --shadow:0 10px 25px rgba(0,0,0,.12);
-    }
-
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family: "Segoe UI", Arial, sans-serif;
-      color:var(--text);
-      background:var(--light);
-      line-height:1.6;
-    }
-
-    /* Header / nav (style proche du site de base) */
-    header{
-      position:fixed;
-      top:0;left:0;right:0;
-      z-index:1000;
-      background:linear-gradient(90deg, rgba(15,59,31,.96), rgba(31,122,58,.93));
-      backdrop-filter: blur(4px);
-      box-shadow:0 4px 14px rgba(0,0,0,.16);
-    }
-    .nav{
-      max-width:1200px;
-      margin:auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:14px 20px;
-    }
-    .brand{
-      color:var(--white);
-      font-weight:900;
-      letter-spacing:.8px;
-      font-size:1.1rem;
-    }
-    .brand span{color:var(--accent)}
-    .menu{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-    .menu a{
-      color:var(--white);
-      text-decoration:none;
-      font-weight:600;
-      font-size:.95rem;
-      opacity:.95;
-      transition:.2s;
-    }
-    .menu a:hover{opacity:1;color:var(--accent)}
-
-    /* Hero */
-    .hero{
-      min-height:100vh;
-      background:
-        linear-gradient(rgba(8,27,14,.62), rgba(8,27,14,.6)),
-        url("https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1700&q=80") center/cover no-repeat;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      color:var(--white);
-      padding:110px 20px 60px;
-    }
-    .hero-content{
-      max-width:900px;
-      animation:fadeUp 1s ease both;
-    }
-    .hero h1{
-      font-size:clamp(2rem,5vw,3.6rem);
-      line-height:1.15;
-      margin-bottom:16px;
-      text-transform:uppercase;
-      letter-spacing:.6px;
-    }
-    .hero p{
-      font-size:clamp(1rem,2vw,1.2rem);
-      margin-bottom:28px;
-      opacity:.96;
-    }
-    .cta{
-      display:inline-block;
-      background:var(--accent);
-      color:#132b18;
-      font-weight:800;
-      text-decoration:none;
-      border-radius:999px;
-      padding:13px 28px;
-      transition:transform .2s ease, box-shadow .2s ease;
-      box-shadow:0 8px 20px rgba(0,0,0,.2);
-    }
-    .cta:hover{
-      transform:translateY(-3px);
-      box-shadow:0 12px 22px rgba(0,0,0,.25);
-    }
-
-    /* Sections */
-    section{
-      padding:78px 20px;
-    }
-    .container{
-      max-width:1200px;
-      margin:auto;
-    }
-    .section-title{
-      text-align:center;
-      color:var(--primary);
-      margin-bottom:34px;
-      font-size:clamp(1.5rem,3vw,2.2rem);
-      position:relative;
-    }
-    .section-title::after{
-      content:"";
-      display:block;
-      width:90px;height:4px;
-      border-radius:50px;
-      margin:10px auto 0;
-      background:linear-gradient(90deg,var(--secondary),var(--accent));
-    }
-
-    /* Cards (modèles) */
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:22px;
-    }
-    .card{
-      background:var(--white);
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      transform:translateY(20px);
-      opacity:0;
-      animation:fadeUp .8s ease forwards;
-    }
-    .card:nth-child(2){animation-delay:.15s}
-    .card:nth-child(3){animation-delay:.3s}
-    .card:nth-child(4){animation-delay:.45s}
-    .card img{
-      width:100%;
-      height:190px;
-      object-fit:cover;
-    }
-    .card-content{
-      padding:16px;
-    }
-    .card h3{
-      color:var(--primary);
-      margin-bottom:8px;
-      font-size:1.15rem;
-    }
-    .badge{
-      margin-top:10px;
-      display:inline-block;
-      background:#e9f6ec;
-      color:var(--secondary);
-      padding:5px 11px;
-      border-radius:999px;
-      font-size:.84rem;
-      font-weight:700;
-    }
-
-    /* Bloc texte / arguments */
-    .feature-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:18px;
-      margin-top:10px;
-    }
-    .feature{
-      background:var(--white);
-      border-left:5px solid var(--secondary);
-      border-radius:10px;
-      padding:18px;
-      box-shadow:0 6px 16px rgba(0,0,0,.08);
-      transition:transform .2s ease;
-    }
-    .feature:hover{transform:translateY(-3px)}
-    .feature h4{
-      color:var(--primary);
-      margin-bottom:7px;
-    }
-
-    /* CTA contact bloc */
-    .contact-box{
-      background:linear-gradient(120deg,var(--primary),var(--secondary));
-      color:var(--white);
-      border-radius:16px;
-      padding:28px;
-      box-shadow:var(--shadow);
-      text-align:center;
-    }
-    .contact-box p{margin:8px 0 18px}
-    .contact-box a{
-      color:#132b18;
-      background:var(--accent);
-      text-decoration:none;
-      font-weight:800;
-      padding:11px 20px;
-      border-radius:999px;
-      display:inline-block;
-    }
-
-    footer{
-      background:#0d2e18;
-      color:#d6e6db;
-      text-align:center;
-      padding:20px;
-      font-size:.95rem;
-    }
-
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(20px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-
-    @media (max-width:760px){
-      .menu{gap:12px}
-      .menu a{font-size:.9rem}
-      .nav{padding:12px 14px}
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriels Tracteurs CLAAS - CASA SERVICE MACHINE</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <header>
-    <nav class="nav">
-      <div class="brand">CLAAS <span>TRACTEURS</span></div>
-      <div class="menu">
-        <a href="#accueil">Accueil</a>
-        <a href="#modeles">Modèles</a>
-        <a href="#avantages">Avantages</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- Section 1 : Hero -->
-    <section class="hero" id="accueil">
-      <div class="hero-content">
-        <h1>Performance CLAAS<br>pour chaque exploitation</h1>
-        <p>
-          Une gamme de tracteurs conçue pour la puissance, la précision et le confort :
-          des travaux quotidiens aux campagnes les plus intensives.
-        </p>
-        <a href="#modeles" class="cta">Découvrir les modèles</a>
-      </div>
-    </section>
-
-    <!-- Section 2 : Modèles -->
-    <section id="modeles">
-      <div class="container">
-        <h2 class="section-title">Gammes de tracteurs CLAAS</h2>
-        <div class="cards">
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=900&q=80" alt="CLAAS AXION">
-            <div class="card-content">
-              <h3>AXION</h3>
-              <p>Puissance élevée et transmission optimisée pour les travaux lourds et les grandes surfaces.</p>
-              <span class="badge">205–445 ch</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="csm-logo-5.png" alt="CASA SERVICE MACHINE Logo">
+                <div class="logo-text">
+                    <p class="subtitle">Tutoriels tracteurs CLAAS</p>
+                </div>
             </div>
-          </article>
-
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?auto=format&fit=crop&w=900&q=80" alt="CLAAS ARION">
-            <div class="card-content">
-              <h3>ARION</h3>
-              <p>Le bon compromis entre polyvalence, confort de conduite et rendement pour l’exploitation mixte.</p>
-              <span class="badge">125–205 ch</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=900&q=80" alt="CLAAS ELIOS">
-            <div class="card-content">
-              <h3>ELIOS</h3>
-              <p>Compact et maniable, idéal pour les travaux d’élevage, d’entretien et les parcelles étroites.</p>
-              <span class="badge">75–103 ch</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=900&q=80" alt="CLAAS XERION">
-            <div class="card-content">
-              <h3>XERION</h3>
-              <p>Très haute puissance, traction maximale et technologies avancées pour les chantiers exigeants.</p>
-              <span class="badge">435–653 ch</span>
-            </div>
-          </article>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#categories">Catégories</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <!-- Section 3 : Avantages -->
-    <section id="avantages">
-      <div class="container">
-        <h2 class="section-title">Pourquoi choisir un tracteur CLAAS ?</h2>
-        <div class="feature-grid">
-          <div class="feature">
-            <h4>Cabine confort premium</h4>
-            <p>Ergonomie, visibilité et réduction des vibrations pour travailler plus longtemps sans fatigue.</p>
-          </div>
-          <div class="feature">
-            <h4>Technologie embarquée</h4>
-            <p>Guidage GPS, télémétrie et pilotage intelligent pour une précision optimale au champ.</p>
-          </div>
-          <div class="feature">
-            <h4>Rendement & sobriété</h4>
-            <p>Moteurs performants et gestion efficace de la puissance pour réduire les coûts d’exploitation.</p>
-          </div>
-          <div class="feature">
-            <h4>Fiabilité terrain</h4>
-            <p>Conçus pour durer, avec une maintenance facilitée et un service après-vente réactif.</p>
-          </div>
+    <!-- Hero Section with Slideshow -->
+    <section id="accueil" class="hero">
+        <!-- Slideshow Container -->
+        <div class="slideshow-container">
+            <div class="slide fade" style="background-image: url('topic-8000-hrc-cemosautomatic.jpg')"></div>
+            <div class="slide fade" style="background-image: url('fond.jpg')"></div>
+            <div class="slide fade" style="background-image: url('Gaia_99754.jpg')"></div>
+            <div class="slide fade" style="background-image: url('430172-27.jpg')"></div>
+            
+            <!-- Navigation arrows -->
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            
+            <!-- Dots for slide indicators -->
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Section 4 : Contact -->
-    <section id="contact">
-      <div class="container">
-        <div class="contact-box">
-          <h2>Demande d’essai ou de devis</h2>
-          <p>Parle-nous de ton exploitation, et reçois une recommandation CLAAS adaptée à tes besoins.</p>
-          <a href="mailto:contact@exemple-claas.fr">contact@exemple-claas.fr</a>
+        <!-- Content overlay -->
+        <div class="hero-content">
+            <h2>Maîtrisez votre Tracteur CLAAS</h2>
+            <p>Découvrez nos tutoriels vidéo complets pour optimiser votre expérience avec votre tracteur CLAAS</p>
+            <a href="#categories" class="btn btn-primary">Commencer</a>
         </div>
-      </div>
     </section>
-  </main>
 
-  <footer>
-    © 2026 - Tracteurs CLAAS | Version fidèle inspirée de la mise en page d’origine
-  </footer>
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Catégories de Tutoriels</h2>
+            <div class="category-grid" id="categoryGrid">
+                <!-- Les catégories seront générées par JavaScript -->
+            </div>
+        </div>
+    </section>
 
+    <!-- Tutoriels Section (Pour afficher les tutoriels filtrés) -->
+    <section id="tutoriels" class="tutoriels" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Catégories de Tutoriels</h2>
+            <div class="tutoriels-grid" id="tutorielsGrid">
+                <!-- Les tutoriels seront générés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Video Player -->
+    <div id="videoModal" class="modal">
+        <div id="modalContent">
+            <!-- Le contenu video sera inséré ici par JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2026 CASA SERVICE MACHINE - Tutoriels tracteurs CLAAS. Tous droits réservés.</p>
+            <p>Pour ajouter des tutoriels, modifiez le fichier <code>data.js</code></p>
+            
+            <div style="margin-top: 2rem; font-size: 1rem; line-height: 1.8;">
+                <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">📞 Nos Agences CASA SERVICE MACHINE :</h3>
+                <p>
+                    <strong>Agence de Tilloy-lès-Mofflaines :</strong> 
+                    <a href="tel:0321242424" style="color: var(--accent-yellow-green); text-decoration: none;">03 21 24 24 24</a>
+                </p>
+                <p>
+                    <strong>Agence de Le Cateau-Cambrésis :</strong> 
+                    <a href="tel:0327841529" style="color: var(--accent-yellow-green); text-decoration: none;">03 27 84 15 29</a>
+                </p>
+                <p>
+                    <strong>Agence de Laventie :</strong> 
+                    <a href="tel:0391826220" style="color: var(--accent-yellow-green); text-decoration: none;">03 91 82 62 20</a>
+                </p>
+                <p>
+                    <strong>Agence d'Orchies :</strong> 
+                    <a href="tel:0320058838" style="color: var(--accent-yellow-green); text-decoration: none;">03 20 05 88 38</a>
+                </p>
+                <p>
+                    <strong>Agence de Saint-Hillaire-Sur-Helpes :</strong> 
+                    <a href="tel:0327577500" style="color: var(--accent-yellow-green); text-decoration: none;">03 27 57 75 00</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        let slideIndex = 1;
+        let slideTimer;
+
+        // Auto advance slides every 5 seconds
+        function autoSlides() {
+            slideIndex++;
+            if (slideIndex > document.querySelectorAll('.slide').length) {
+                slideIndex = 1;
+            }
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlides, 5000);
+        }
+
+        // Manual slide navigation
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex += n;
+            if (slideIndex > document.querySelectorAll('.slide').length) {
+                slideIndex = 1;
+            }
+            if (slideIndex < 1) {
+                slideIndex = document.querySelectorAll('.slide').length;
+            }
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlides, 5000);
+        }
+
+        // Go to specific slide
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlides, 5000);
+        }
+
+        // Display slide
+        function showSlide(n) {
+            let slides = document.querySelectorAll('.slide');
+            let dots = document.querySelectorAll('.dot');
+
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        // Start slideshow on page load
+        window.addEventListener('load', () => {
+            showSlide(slideIndex);
+            autoSlides();
+        });
+    </script>
 </body>
 </html>
