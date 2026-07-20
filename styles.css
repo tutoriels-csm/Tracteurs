@@ -392,3 +392,17 @@ body {
         padding: 64px 0;
     }
 }
+.hero-logo {
+    width: min(260px, 60vw);
+    height: auto;
+    margin: 0 auto 18px;
+    display: block;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.35));
+}
+
+@media (max-width: 560px) {
+    .hero-logo {
+        width: min(200px, 72vw);
+        margin-bottom: 14px;
+    }
+}
