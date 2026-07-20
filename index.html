@@ -50,6 +50,136 @@
 
         <!-- Content overlay -->
         <div class="hero-content">
+            <h2>Maîtrisez votre Tracteur CLAAS</h2>
+            <p>Découvrez nos tutoriels vidéo complets pour optimiser votre expérience avec votre tracteur CLAAS</p>
+            <a href="#categories" class="btn btn-primary">Commencer</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Catégories de Tutoriels</h2>
+            <div class="category-grid" id="categoryGrid">
+                <!-- Les catégories seront générées par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutoriels Section (Pour afficher les tutoriels filtrés) -->
+    <section id="tutoriels" class="tutoriels" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Catégories de Tutoriels</h2>
+            <div class="tutoriels-grid" id="tutorielsGrid">
+                <!-- Les tutoriels seront générés par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Video Player -->
+    <div id="videoModal" class="modal">
+        <div id="modalContent">
+            <!-- Le contenu video sera inséré ici par JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2026 CASA SERVICE MACHINE - Tutoriels tracteurs CLAAS. Tous droits réservés.</p>
+            <p>Pour ajouter des tutoriels, modifiez le fichier <code>data.js</code></p>
+            
+            <div style="margin-top: 2rem; font-size: 1rem; line-height: 1.8;">
+                <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">📞 Nos Agences CASA SERVICE MACHINE :</h3>
+                <p>
+                    <strong>Agence de Tilloy-lès-Mofflaines :</strong> 
+                    <a href="tel:0321242424" style="color: var(--accent-yellow-green); text-decoration: none;">03 21 24 24 24</a>
+                </p>
+                <p>
+                    <strong>Agence de Le Cateau-Cambrésis :</strong> 
+                    <a href="tel:0327841529" style="color: var(--accent-yellow-green); text-decoration: none;">03 27 84 15 29</a>
+                </p>
+                <p>
+                    <strong>Agence de Laventie :</strong> 
+                    <a href="tel:0391826220" style="color: var(--accent-yellow-green); text-decoration: none;">03 91 82 62 20</a>
+                </p>
+                <p>
+                    <strong>Agence d'Orchies :</strong> 
+                    <a href="tel:0320058838" style="color: var(--accent-yellow-green); text-decoration: none;">03 20 05 88 38</a>
+                </p>
+                <p>
+                    <strong>Agence de Saint-Hillaire-Sur-Helpes :</strong> 
+                    <a href="tel:0327577500" style="color: var(--accent-yellow-green); text-decoration: none;">03 27 57 75 00</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+        let slideIndex = 1;
+        let slideTimer;
+
+        function autoSlides() {
+            slideIndex++;
+            if (slideIndex > document.querySelectorAll('.slide').length) slideIndex = 1;
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlides, 5000);
+        }
+
+        function changeSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex += n;
+            if (slideIndex > document.querySelectorAll('.slide').length) slideIndex = 1;
+            if (slideIndex < 1) slideIndex = document.querySelectorAll('.slide').length;
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlides, 5000);
+        }
+
+        function currentSlide(n) {
+            clearTimeout(slideTimer);
+            slideIndex = n;
+            showSlide(slideIndex);
+            slideTimer = setTimeout(autoSlides, 5000);
+        }
+
+        function showSlide(n) {
+            let slides = document.querySelectorAll('.slide');
+            let dots = document.querySelectorAll('.dot');
+
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[slideIndex - 1].classList.add('active');
+            dots[slideIndex - 1].classList.add('active');
+        }
+
+        window.addEventListener('load', () => {
+            showSlide(slideIndex);
+            autoSlides();
+        });
+    </script>
+</body>
+</html>            
+            <!-- Navigation arrows -->
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+            
+            <!-- Dots for slide indicators -->
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+
+        <!-- Content overlay -->
+        <div class="hero-content">
             <img src="csm-logo-5.png" alt="CASA SERVICE MACHINE Logo" class="hero-logo">
             <h2>Maîtrisez votre Tracteur CLAAS</h2>
             <p>Découvrez nos tutoriels vidéo complets pour optimiser votre expérience avec votre tracteur CLAAS</p>
