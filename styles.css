@@ -2,14 +2,12 @@
     --claas-green: #1f7a3a;
     --claas-dark: #103d1f;
     --accent-yellow-green: #c7ff3d;
-
     --text-dark: #1e1e1e;
     --text-light: #f7f7f7;
-
     --bg-light: #f4f7f4;
     --white: #ffffff;
 
-    /* Gris "CASA-like" */
+    /* Gris CASA */
     --casa-gray: #6f7277;
     --casa-gray-dark: #4f5257;
 
@@ -35,13 +33,12 @@ body {
     line-height: 1.6;
 }
 
-/* Utilities */
 .container {
     width: min(1200px, 92%);
     margin: 0 auto;
 }
 
-/* ================= HEADER (BLANC) ================= */
+/* Header blanc */
 .header {
     position: fixed;
     top: 0;
@@ -76,14 +73,13 @@ body {
     color: var(--casa-gray);
     font-weight: 700;
     font-size: .95rem;
-    letter-spacing: .2px;
 }
 
 .nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     flex-wrap: wrap;
 }
 
@@ -99,7 +95,25 @@ body {
     color: var(--casa-gray-dark);
 }
 
-/* ================= HERO + SLIDESHOW ================= */
+/* Bouton moissonneuse dans le header */
+.btn-moissonneuses {
+    display: inline-block;
+    background: var(--casa-gray);
+    color: #fff !important;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.btn-moissonneuses:hover {
+    background: var(--casa-gray-dark);
+    transform: translateY(-1px);
+}
+
+/* Hero */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -201,13 +215,7 @@ body {
     color: var(--white);
     max-width: 900px;
     width: 92%;
-    margin-top: 56px; /* compensation header fixe */
-    animation: heroUp .9s ease both;
-}
-
-@keyframes heroUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    margin-top: 56px;
 }
 
 .hero-content h2 {
@@ -215,13 +223,11 @@ body {
     line-height: 1.15;
     text-transform: uppercase;
     margin-bottom: 12px;
-    letter-spacing: .4px;
 }
 
 .hero-content p {
     font-size: clamp(1rem, 2vw, 1.25rem);
     margin-bottom: 24px;
-    opacity: .97;
 }
 
 .btn {
@@ -232,7 +238,6 @@ body {
     font-weight: 800;
     border-radius: 999px;
     padding: 12px 24px;
-    transition: .2s ease;
 }
 
 .btn-primary {
@@ -243,10 +248,9 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 11px 22px rgba(0,0,0,.28);
 }
 
-/* ================= SECTIONS ================= */
+/* Sections */
 .categories,
 .tutoriels {
     padding: 78px 0;
@@ -257,17 +261,6 @@ body {
     color: var(--claas-dark);
     font-size: clamp(1.6rem, 3vw, 2.3rem);
     margin-bottom: 34px;
-    position: relative;
-}
-
-.section-title::after {
-    content: "";
-    display: block;
-    width: 90px;
-    height: 4px;
-    margin: 10px auto 0;
-    border-radius: 50px;
-    background: linear-gradient(90deg, var(--claas-green), var(--accent-yellow-green));
 }
 
 /* Cards */
@@ -290,7 +283,6 @@ body {
 .category-card:hover,
 .tutorial-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 14px 28px rgba(0,0,0,.16);
 }
 
 .category-card-content,
@@ -298,37 +290,20 @@ body {
     padding: 16px;
 }
 
-.category-card h3,
-.tutorial-card h3 {
-    color: var(--claas-dark);
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-}
-
-.category-card p,
-.tutorial-card p {
-    font-size: .95rem;
-    color: #444;
-}
-
-/* Images */
 .tutorial-thumbnail,
-.category-thumbnail,
-.tutorial-card img,
-.category-card img {
+.tutorial-card img {
     width: 100%;
     height: 180px;
     object-fit: cover;
     display: block;
 }
 
-/* ================= FOOTER (GRIS CASA) ================= */
+/* Footer gris */
 .footer {
     background: var(--casa-gray);
     color: #ffffff;
     padding: 42px 0;
     text-align: center;
-    margin-top: 10px;
 }
 
 .footer a {
@@ -342,7 +317,7 @@ body {
     color: #ffffff;
 }
 
-/* ================= MODAL ================= */
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -359,10 +334,9 @@ body {
     background: #111;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 16px 36px rgba(0,0,0,.4);
 }
 
-/* ================= RESPONSIVE ================= */
+/* Responsive */
 @media (max-width: 900px) {
     .header .container {
         flex-direction: column;
@@ -371,7 +345,7 @@ body {
     }
 
     .nav ul {
-        gap: 12px;
+        gap: 10px;
     }
 
     .hero-content {
@@ -379,21 +353,65 @@ body {
     }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 480px) {
+    .header {
+        padding: 0.8rem 0;
+    }
+
+    .header .container {
+        gap: 0.5rem;
+    }
+
+    .logo {
+        gap: 0.6rem;
+    }
+
     .logo img {
-        height: 46px;
+        height: 45px;
     }
 
     .logo-text .subtitle {
-        font-size: .86rem;
+        font-size: 0.75rem;
+    }
+
+    .nav ul {
+        gap: 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .btn-moissonneuses {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+
+    .hero {
+        min-height: 400px;
+    }
+
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
     }
 
     .prev, .next {
-        font-size: 1.6rem;
+        padding: 10px;
+        font-size: 14px;
     }
 
-    .categories,
-    .tutoriels {
-        padding: 64px 0;
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .category-card {
+        min-height: 250px;
     }
 }
