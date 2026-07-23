@@ -54,6 +54,33 @@ function initCategories() {
     card.onclick = () => showTutorials(cat);
     grid.appendChild(card);
   });
+
+  // Ajout des modules autonomes dans la mÃªme grille, sans modifier la mise en page.
+  if (Array.isArray(window.externalCategories || externalCategories)) {
+    (window.externalCategories || externalCategories).forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'category-card';
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `Ouvrir ${item.title} â€“ ${item.description}`);
+      card.innerHTML = `
+        <div class="category-card-content">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <p>${item.count} tutoriels</p>
+        </div>
+      `;
+      const openModule = () => { window.location.href = item.url; };
+      card.onclick = openModule;
+      card.onkeydown = event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openModule();
+        }
+      };
+      grid.appendChild(card);
+    });
+  }
 }
 
 function showTutorials(category) {
@@ -70,8 +97,8 @@ function showTutorials(category) {
       <div class="tutorial-card-content">
         <h3>${t.title}</h3>
         <p>${t.description}</p>
-        <p><strong>Durée :</strong> ${t.duration}</p>
-        <button class="btn btn-primary">Voir la vidéo</button>
+        <p><strong>DurÃ©e :</strong> ${t.duration}</p>
+        <button class="btn btn-primary">Voir la vidÃ©o</button>
       </div>
     `;
     card.querySelector('button').onclick = () => openModal(t);
@@ -87,7 +114,7 @@ function openModal(t) {
   if (!modal || !content) return;
   content.innerHTML = `
     <div style="position:relative;background:#000;">
-      <button id="closeModalBtn" style="position:absolute;top:8px;right:10px;z-index:10;background:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;">×</button>
+      <button id="closeModalBtn" style="position:absolute;top:8px;right:10px;z-index:10;background:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;">Ã—</button>
       <iframe width="100%" height="520"
         src="https://www.youtube.com/embed/${t.youtubeId}?autoplay=1"
         title="${t.title}" frameborder="0"
