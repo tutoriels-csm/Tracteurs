@@ -108,7 +108,7 @@ const externalCategories = [
     {
         title: "CEMOS Tracteur",
         description: "CEMOS Tracteur",
-        label: "1 tutoriel interactif • 47 étapes",
+        count: 47,
         url: "cemos-tracteur/index.html"
     }
 ];
