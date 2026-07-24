@@ -1,0 +1,340 @@
+:root {
+    --claas-green: #1f7a3a;
+    --claas-dark: #103d1f;
+    --accent-yellow-green: #c7ff3d;
+    --text-dark: #1e1e1e;
+    --bg-light: #f4f7f4;
+    --white: #ffffff;
+
+    --casa-gray: #6f7277;
+    --casa-gray-dark: #4f5257;
+
+    --shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+    --radius: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-light);
+    line-height: 1.6;
+}
+
+.container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    z-index: 1000;
+    box-shadow: 0 4px 14px rgba(0,0,0,.10);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text .subtitle {
+    color: var(--casa-gray);
+    font-weight: 700;
+    font-size: .95rem;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    color: var(--casa-gray);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: .95rem;
+    transition: .2s ease;
+}
+
+.nav a:hover { color: var(--casa-gray-dark); }
+
+/* Boutons nav */
+.btn-moissonneuses,
+.btn-cemis1200 {
+    display: inline-block;
+    color: #fff !important;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.btn-moissonneuses {
+    background: var(--casa-gray);
+}
+.btn-moissonneuses:hover {
+    background: var(--casa-gray-dark);
+    transform: translateY(-1px);
+}
+
+.btn-cemis1200 {
+    background: var(--claas-green);
+}
+.btn-cemis1200:hover {
+    background: #165d2d;
+    transform: translateY(-1px);
+}
+
+/* Hero + slider */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slideshow-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity .8s ease;
+}
+.slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(10,30,16,.62), rgba(10,30,16,.55));
+}
+.slide.active { opacity: 1; z-index: 1; }
+
+.fade { animation: fade 1s ease; }
+@keyframes fade { from { opacity: .4; } to { opacity: 1; } }
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: .4rem .7rem;
+    border-radius: 8px;
+    user-select: none;
+    z-index: 3;
+    background: rgba(0,0,0,.25);
+}
+.prev { left: 16px; }
+.next { right: 16px; }
+
+.dots-container {
+    position: absolute;
+    bottom: 22px;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+}
+.dot {
+    cursor: pointer;
+    height: 11px;
+    width: 11px;
+    margin: 0 4px;
+    background-color: rgba(255,255,255,.55);
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot.active, .dot:hover { background-color: var(--accent-yellow-green); }
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    color: #fff;
+    max-width: 900px;
+    width: 92%;
+    margin-top: 56px;
+}
+.hero-content h2 {
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.hero-content p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin-bottom: 24px;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 12px 24px;
+}
+.btn-primary {
+    background: var(--accent-yellow-green);
+    color: #122a16;
+}
+
+/* Sections */
+.categories, .tutoriels { padding: 78px 0; }
+
+.section-title {
+    text-align: center;
+    color: var(--claas-dark);
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    margin-bottom: 34px;
+}
+
+.category-grid, .tutoriels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 22px;
+}
+
+.category-card, .tutorial-card {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .2s ease;
+}
+.category-card:hover, .tutorial-card:hover { transform: translateY(-4px); }
+
+.category-card-content, .tutorial-card-content { padding: 16px; }
+
+.tutorial-thumbnail, .tutorial-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    padding: 28px 14px;
+    overflow-y: auto;
+}
+#modalContent {
+    max-width: 980px;
+    margin: 5vh auto;
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Footer */
+.footer {
+    background: var(--casa-gray);
+    color: #fff;
+    padding: 42px 0;
+    text-align: center;
+}
+.footer a { color: #fff; }
+.footer code {
+    background: rgba(255,255,255,.15);
+    padding: 2px 7px;
+    border-radius: 6px;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .header .container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+    .nav ul { gap: 10px; }
+    .hero-content { margin-top: 90px; }
+}
+
+@media (max-width: 480px) {
+    .header { padding: 0.8rem 0; }
+    .header .container { gap: 0.5rem; }
+
+    .logo { gap: 0.6rem; }
+    .logo img { height: 45px; }
+    .logo-text .subtitle { font-size: 0.75rem; }
+
+    .nav ul { gap: 0.8rem; font-size: 0.8rem; }
+
+    .btn-moissonneuses,
+    .btn-cemis1200 {
+        padding: 5px 10px;
+        font-size: 0.75rem;
+    }
+
+    .hero { min-height: 400px; }
+    .hero-content h2 { font-size: 1.8rem; }
+    .hero-content p { font-size: 0.9rem; }
+
+    .prev, .next {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+
+    .category-card {
+        min-height: 250px;
+    }
+}
