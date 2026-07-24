@@ -1,4 +1,3 @@
-let started = false;
 let slideIndex = 1;
 let timer = null;
 
@@ -25,14 +24,14 @@ function autoSlides() {
   timer = setTimeout(autoSlides, 5000);
 }
 
-window.changeSlide = function (n) {
+window.changeSlide = function(n) {
   clearTimeout(timer);
   slideIndex += n;
   showSlide(slideIndex);
   timer = setTimeout(autoSlides, 5000);
 };
 
-window.currentSlide = function (n) {
+window.currentSlide = function(n) {
   clearTimeout(timer);
   slideIndex = n;
   showSlide(slideIndex);
@@ -110,9 +109,7 @@ function openModal(t) {
     </div>
   `;
   modal.style.display = 'block';
-
-  const closeBtn = document.getElementById('closeModalBtn');
-  if (closeBtn) closeBtn.onclick = closeModal;
+  document.getElementById('closeModalBtn').onclick = closeModal;
 }
 
 function closeModal() {
@@ -124,21 +121,11 @@ function closeModal() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (started) return;
-  started = true;
-
   showSlide(slideIndex);
   timer = setTimeout(autoSlides, 5000);
   renderCategories();
 
   const modal = document.getElementById('videoModal');
-  if (modal) {
-    modal.addEventListener('click', e => {
-      if (e.target === modal) closeModal();
-    });
-  }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
+  if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 });
