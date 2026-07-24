@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   showSlide(slideIndex);
   timer = setTimeout(autoSlides, 5000);
-
   renderCategories();
 
   const modal = document.getElementById('videoModal');
