@@ -107,7 +107,7 @@ const tutorials = [
 const externalCategories = [
     {
         title: "CEMOS Tracteur",
-        description: "CLAAS ARION 6.190 CMATIC",
+        description:,
         count: 47,
         url: "cemos-tracteur/index.html"
     }
